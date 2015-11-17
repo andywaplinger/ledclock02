@@ -1,7 +1,7 @@
 /* Sketch for LED clock mirror
  * Created by Andy Waplinger, 2015
  * http://andywaplinger.com
- * https://github.com/andywaplinger/ledclock05
+ * https://github.com/andywaplinger/ledclock02
  */
 
 #include <FastLED.h>
