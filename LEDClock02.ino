@@ -11,9 +11,12 @@
 #define MIN_PIN 5
 //#define CLOCK_PIN 6
 
-#include "Wire.h"
+#include <Wire.h>
 #define DS3231_I2C_ADDRESS 0x68
 
+#include <DS3231.h>
+
+DS3231 clock;
 
 // Convert normal decimal numbers to binary coded decimal
 byte decToBcd(byte val)
@@ -41,6 +44,8 @@ void setup() {
 
   pinMode(pirPin, INPUT);
 
+//  RTC.begin();
+
   Wire.begin();
   Serial.begin(9600);
   // set the initial time here:
@@ -50,6 +55,7 @@ void setup() {
 
 void loop() {
   displayTime();
+  displayTemp();
   if (digitalRead(pirPin) == HIGH){
     displayHour();
     delay(500);
@@ -142,6 +148,27 @@ void displayTime()
     Serial.println("Saturday");
     break;
   }
+}
+
+void displayTemp()
+{
+  int temperature;
+  
+  temperature = clock.readTemperature();
+ 
+  Serial.print("Temperature is ");
+  Serial.print(temperature);
+  Serial.print("C or ");
+  Serial.print((temperature * 1.8) + 32);
+  Serial.println("F");
+/*
+  tempC = RTC.getTemperature();
+  tempF = (tempC * 1.8) + 32.0; // Convert C to F
+  
+  Serial.print("DS3231:  ");
+  Serial.print(tempF);
+  Serial.print("F");
+  */
 }
 
 void displayHour()
