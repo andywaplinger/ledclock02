@@ -44,8 +44,6 @@ void setup() {
 
   pinMode(pirPin, INPUT);
 
-//  RTC.begin();
-
   Wire.begin();
   Serial.begin(9600);
   // set the initial time here:
@@ -152,23 +150,11 @@ void displayTime()
 
 void displayTemp()
 {
-  int temperature;
-  
-  temperature = clock.readTemperature();
- 
   Serial.print("Temperature is ");
-  Serial.print(temperature);
+  Serial.print(clock.readTemperature());
   Serial.print("C or ");
-  Serial.print((temperature * 1.8) + 32);
+  Serial.print((clock.readTemperature() * 1.8) + 32);
   Serial.println("F");
-/*
-  tempC = RTC.getTemperature();
-  tempF = (tempC * 1.8) + 32.0; // Convert C to F
-  
-  Serial.print("DS3231:  ");
-  Serial.print(tempF);
-  Serial.print("F");
-  */
 }
 
 void displayHour()
