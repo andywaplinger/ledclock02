@@ -5,16 +5,15 @@
  */
 
 #include <FastLED.h>
-#define HOUR_LEDS 60
-#define MIN_LEDS 60
-#define HOUR_PIN 4
-#define MIN_PIN 5
-//#define CLOCK_PIN 6
+#define HOUR_LEDS 60 //Number of LEDs in the array
+#define MIN_LEDS 60 //Number of LEDs in the array
+#define HOUR_PIN 4 //Hour LED strip output
+#define MIN_PIN 5 //Minute LED strip output
 
 #include <Wire.h>
 #define DS3231_I2C_ADDRESS 0x68
 
-#include <DS3231.h>
+#include <DS3231.h> //https://github.com/jarzebski/Arduino-DS3231
 
 DS3231 clock;
 
@@ -30,12 +29,10 @@ byte bcdToDec(byte val)
   return( (val/16*10) + (val%16) );
 }
 
-
 CRGB minArray[MIN_LEDS];
 CRGB hourArray[HOUR_LEDS];
 
 int pirPin = 3;
-
 
 void setup() {
   // put your setup code here, to run once:
@@ -232,8 +229,6 @@ void displayMin()
     }
     FastLED.show();
     delay(10);
-    // clear this led for the next time around the loop
-    //leds[dot] = CRGB::Black;
   }
 }
 
