@@ -9,7 +9,7 @@
 #define MIN_LEDS 60
 #define HOUR_PIN 4
 #define MIN_PIN 5
-#define CLOCK_PIN 6
+//#define CLOCK_PIN 6
 
 #include "Wire.h"
 #define DS3231_I2C_ADDRESS 0x68
@@ -52,6 +52,7 @@ void loop() {
   displayTime();
   if (digitalRead(pirPin) == HIGH){
     displayHour();
+    delay(500);
     displayMin();
   }
   else {
@@ -217,7 +218,7 @@ void displayMin()
       minArray[minLED] = CRGB::Blue;
     }
     FastLED.show();
-    delay(20);
+    delay(10);
     // clear this led for the next time around the loop
     //leds[dot] = CRGB::Black;
   }
@@ -232,7 +233,7 @@ void displayOff()
   for (int offLED = 59; offLED >= 0; offLED--){
     minArray[offLED] = CRGB::Black;
     hourArray[offLED] = CRGB::Black;
-    delay(20);
   }
   FastLED.show();
+  delay(20);
 }
